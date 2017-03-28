@@ -1,0 +1,46 @@
+
+FileETag none
+<FilesMatch "class\booster_.+\.php$">
+	FileETag MTime Size
+	Order deny,allow
+	Allow from all
+	Satisfy any
+</FilesMatch>
+
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteRule ^booster_css\.php/(dir.*)$ booster_css.php?$1 [L]
+	RewriteRule ^booster_css_ie\.php/(dir.*)$ booster_css_ie.php?$1 [L]
+	RewriteRule ^booster_js\.php/(dir.*)$ booster_js.php?$1 [L]
+	RewriteRule ^booster_mhtml\.php/(dir.*)$ booster_mhtml.php?$1 [L]
+	RewriteBase /
+	RewriteCond %{SCRIPT_FILENAME} !-d
+	RewriteCond %{SCRIPT_FILENAME} !-f
+	RewriteRule ([a-zA-Z0-9-]*)$ /index.php?mode=$1
+</IfModule>
+
+<IfModule mod_rewrite.so>
+	RewriteEngine on
+	RewriteRule ^booster_css\.php/(dir.*)$ booster_css.php?$1 [L]
+	RewriteRule ^booster_css_ie\.php/(dir.*)$ booster_css_ie.php?$1 [L]
+	RewriteRule ^booster_js\.php/(dir.*)$ booster_js.php?$1 [L]
+	RewriteRule ^booster_mhtml\.php/(dir.*)$ booster_mhtml.php?$1 [L]
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 years"
+</IfModule>
+<IfModule mod_expires.so>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 years"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "max-age=2592000, public"
+</IfModule>
+
+<IfModule mod_headers.so>
+  Header set Cache-Control "max-age=2592000, public"
+</IfModule>
